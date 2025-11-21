@@ -12,30 +12,112 @@
 <body>
     <%- include('partials/header') %>
 
-    <!-- Hero Section -->
-    <section class="hero bg-primary text-white py-5">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4">Bienvenue à l'ASC Zone de Tir</h1>
-                    <p class="lead mb-4">
-                        Une association dédiée au sport, à la culture et à la convivialité.
-                        Rejoignez-nous pour vivre une expérience unique au Sénégal !
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="/auth/inscription" class="btn btn-light btn-lg">
-                            <i class="bi bi-person-plus me-2"></i>Nous rejoindre
-                        </a>
-                        <a href="/qui-sommes-nous" class="btn btn-outline-light btn-lg">
-                            En savoir plus
-                        </a>
+    <!-- Hero Slider Section -->
+    <section class="hero-slider">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <!-- Slide 1 - Bienvenue -->
+                <div class="carousel-item active">
+                    <div class="hero bg-primary text-white py-5">
+                        <div class="container py-5">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h1 class="display-4 fw-bold mb-4">Bienvenue à l'ASC Zone de Tir</h1>
+                                    <p class="lead mb-4">
+                                        Une association dédiée au sport, à la culture et à la convivialité.
+                                        Rejoignez-nous pour vivre une expérience unique au Sénégal !
+                                    </p>
+                                    <div class="d-flex gap-3">
+                                        <a href="/auth/inscription" class="btn btn-light btn-lg">
+                                            <i class="bi bi-person-plus me-2"></i>Nous rejoindre
+                                        </a>
+                                        <a href="/qui-sommes-nous" class="btn btn-outline-light btn-lg">
+                                            En savoir plus
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-4 mt-lg-0">
+                                    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&h=600&fit=crop"
+                                         alt="ASC Zone de Tir" class="img-fluid rounded shadow">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 mt-4 mt-lg-0">
-                    <img src="/images/hero-image.jpg" alt="ASC Zone de Tir" class="img-fluid rounded shadow"
-                         onerror="this.src='https://placehold.co/600x400/1e40af/white?text=ASC+Zone+de+Tir'">
+
+                <!-- Slide 2 - Sport -->
+                <div class="carousel-item">
+                    <div class="hero bg-gradient-sport text-white py-5">
+                        <div class="container py-5">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h1 class="display-4 fw-bold mb-4">Passion du Sport</h1>
+                                    <p class="lead mb-4">
+                                        Football, Basketball, Tir sportif... Découvrez nos disciplines et
+                                        rejoignez nos équipes pour partager votre passion du sport !
+                                    </p>
+                                    <div class="d-flex gap-3">
+                                        <a href="/activites" class="btn btn-light btn-lg">
+                                            <i class="bi bi-trophy me-2"></i>Nos activités
+                                        </a>
+                                        <a href="/resultats" class="btn btn-outline-light btn-lg">
+                                            Nos résultats
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-4 mt-lg-0">
+                                    <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop"
+                                         alt="Sport" class="img-fluid rounded shadow">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 - Culture -->
+                <div class="carousel-item">
+                    <div class="hero bg-gradient-culture text-white py-5">
+                        <div class="container py-5">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <h1 class="display-4 fw-bold mb-4">Richesse Culturelle</h1>
+                                    <p class="lead mb-4">
+                                        Danse, théâtre, musique, arts... Plongez dans notre patrimoine culturel
+                                        et participez à nos événements artistiques !
+                                    </p>
+                                    <div class="d-flex gap-3">
+                                        <a href="/evenements" class="btn btn-light btn-lg">
+                                            <i class="bi bi-calendar-event me-2"></i>Événements
+                                        </a>
+                                        <a href="/galerie" class="btn btn-outline-light btn-lg">
+                                            Galerie
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-4 mt-lg-0">
+                                    <img src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=800&h=600&fit=crop"
+                                         alt="Culture" class="img-fluid rounded shadow">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Contrôles du slider -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
         </div>
     </section>
 
