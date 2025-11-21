@@ -238,6 +238,41 @@ Connectez-vous avec votre compte admin et accédez à `/admin/dashboard`
 
 ## 🌐 Déploiement
 
+### Sur Render (Recommandé - Gratuit)
+
+Le projet inclut un fichier `render.yaml` pour un déploiement automatique sur Render.
+
+1. **Créer un compte sur [Render](https://render.com)**
+
+2. **Nouveau Blueprint**
+   - Cliquez sur "New +" → "Blueprint"
+   - Connectez votre repository GitHub
+   - Render détectera automatiquement le fichier `render.yaml`
+
+3. **Configuration automatique**
+   - Le service web sera créé automatiquement
+   - La base de données MongoDB sera provisionnée
+   - Les variables d'environnement seront configurées
+
+4. **Variables d'environnement à configurer manuellement (optionnel)**
+   - `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_USER`, `EMAIL_PASSWORD` (pour les notifications)
+   - `FACEBOOK_URL`, `INSTAGRAM_URL`, `TWITTER_URL` (réseaux sociaux)
+
+5. **Déployer les activités**
+   Une fois déployé, exécutez le script pour peupler la base de données :
+   ```bash
+   npm run seed:activities
+   ```
+
+6. **Créer un admin**
+   Connectez-vous à votre base MongoDB via Render et exécutez :
+   ```javascript
+   db.users.updateOne(
+     { email: "votre-email@example.com" },
+     { $set: { role: "admin", membershipStatus: "active" } }
+   )
+   ```
+
 ### Sur un VPS (Linux)
 
 1. **Installer Node.js et MongoDB**
@@ -250,7 +285,7 @@ sudo apt-get install -y nodejs mongodb
 2. **Cloner et configurer**
 
 ```bash
-git clone https://github.com/votre-repo/asc-zone-de-tir.git
+git clone https://github.com/boubskouk/asc-zone-de-tir.git
 cd asc-zone-de-tir
 npm install --production
 ```
