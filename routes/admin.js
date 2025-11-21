@@ -137,6 +137,60 @@ router.get('/membres/nouveau', async (req, res) => {
   }
 });
 
+// Créer un nouveau membre
+router.post('/membres/nouveau', async (req, res) => {
+  try {
+    const { firstName, lastName, email, phone, dateOfBirth, password, confirmPassword, membershipStatus, role, disciplines, street, city, postalCode, emergencyName, emergencyPhone, emergencyRelationship } = req.body;
+
+    // Vérifier que les mots de passe correspondent
+    if (password !== confirmPassword) {
+      req.session.errorMessage = 'Les mots de passe ne correspondent pas.';
+      return res.redirect('/admin/membres/nouveau');
+    }
+
+    // Vérifier si l'email existe déjà
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      req.session.errorMessage = 'Un membre avec cet email existe déjà.';
+      return res.redirect('/admin/membres/nouveau');
+    }
+
+    // Créer le nouveau membre
+    const member = new User({
+      firstName,
+      lastName,
+      email,
+      phone,
+      dateOfBirth: dateOfBirth || null,
+      password,
+      membershipStatus: membershipStatus || 'pending',
+      role: role || 'member',
+      disciplines: disciplines ? (Array.isArray(disciplines) ? disciplines : [disciplines]) : [],
+      address: {
+        street: street || '',
+        city: city || '',
+        postalCode: postalCode || '',
+        country: 'Sénégal',
+      },
+      emergencyContact: {
+        name: emergencyName || '',
+        phone: emergencyPhone || '',
+        relationship: emergencyRelationship || '',
+      },
+      isEmailVerified: true, // Auto-vérifié pour les créations admin
+    });
+
+    await member.save();
+
+    req.session.successMessage = 'Membre créé avec succès.';
+    res.redirect('/admin/membres');
+  } catch (error) {
+    console.error('Erreur création membre:', error);
+    req.session.errorMessage = error.message || 'Erreur lors de la création du membre.';
+    res.redirect('/admin/membres/nouveau');
+  }
+});
+
 // Formulaire modification membre (DOIT être avant /membres/:id)
 router.get('/membres/:id/modifier', async (req, res) => {
   try {
@@ -168,6 +222,53 @@ router.get('/membres/:id/modifier', async (req, res) => {
       siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
       message: 'Une erreur est survenue',
     });
+  }
+});
+
+// Traiter la modification d'un membre
+router.post('/membres/:id/modifier', async (req, res) => {
+  try {
+    const { firstName, lastName, phone, dateOfBirth, membershipStatus, role, disciplines, street, city, postalCode, emergencyName, emergencyPhone, emergencyRelationship } = req.body;
+
+    const member = await User.findById(req.params.id);
+
+    if (!member) {
+      req.session.errorMessage = 'Membre introuvable.';
+      return res.redirect('/admin/membres');
+    }
+
+    // Mettre à jour les informations
+    member.firstName = firstName;
+    member.lastName = lastName;
+    member.phone = phone;
+    member.dateOfBirth = dateOfBirth || null;
+    member.membershipStatus = membershipStatus;
+    member.role = role;
+    member.disciplines = disciplines ? (Array.isArray(disciplines) ? disciplines : [disciplines]) : [];
+
+    // Adresse
+    member.address = {
+      street: street || '',
+      city: city || '',
+      postalCode: postalCode || '',
+      country: member.address?.country || 'Sénégal',
+    };
+
+    // Contact d'urgence
+    member.emergencyContact = {
+      name: emergencyName || '',
+      phone: emergencyPhone || '',
+      relationship: emergencyRelationship || '',
+    };
+
+    await member.save();
+
+    req.session.successMessage = 'Membre modifié avec succès.';
+    res.redirect('/admin/membres');
+  } catch (error) {
+    console.error('Erreur modification membre:', error);
+    req.session.errorMessage = 'Erreur lors de la modification du membre.';
+    res.redirect(`/admin/membres/${req.params.id}/modifier`);
   }
 });
 
