@@ -22,7 +22,13 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="/admin/membres">Membres</a></li>
-                        <li class="breadcrumb-item active"><%= member.firstName %> <%= member.lastName %></li>
+                        <li class="breadcrumb-item active">
+                            <% if (member._id) { %>
+                                <%= member.firstName %> <%= member.lastName %>
+                            <% } else { %>
+                                Nouveau membre
+                            <% } %>
+                        </li>
                     </ol>
                 </nav>
 

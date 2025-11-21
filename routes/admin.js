@@ -188,13 +188,6 @@ router.get('/articles', async (req, res) => {
   }
 });
 
-router.get('/articles/nouveau', (req, res) => {
-  res.render('admin/articles/form', {
-    title: 'Nouvel article',
-    article: null,
-  });
-});
-
 router.post(
   '/articles/nouveau',
   upload.single('featuredImage'),
@@ -347,13 +340,6 @@ router.get('/evenements', async (req, res) => {
   }
 });
 
-router.get('/evenements/nouveau', (req, res) => {
-  res.render('admin/evenements/form', {
-    title: 'Nouvel événement',
-    event: null,
-  });
-});
-
 router.post(
   '/evenements/nouveau',
   upload.single('featuredImage'),
@@ -462,13 +448,19 @@ router.get('/resultats/nouveau', async (req, res) => {
 
     res.render('admin/resultats/form', {
       title: 'Nouveau résultat',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
       result: null,
       athletes,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
   } catch (error) {
     console.error('Erreur:', error);
     res.status(500).render('errors/500', {
       title: 'Erreur',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
       message: 'Une erreur est survenue',
     });
   }
@@ -509,6 +501,156 @@ router.get('/galerie', async (req, res) => {
       siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
       message: 'Une erreur est survenue',
     });
+  }
+});
+
+// Formulaire nouvel album
+router.get('/galerie/nouveau', async (req, res) => {
+  try {
+    const events = await Event.find().sort({ startDate: -1 });
+
+    res.render('admin/galerie/form', {
+      title: 'Nouvel album',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
+      currentPage: 'galerie',
+      gallery: null,
+      events,
+      successMessage: req.session.successMessage || null,
+      errorMessage: req.session.errorMessage || null,
+    });
+
+    delete req.session.successMessage;
+    delete req.session.errorMessage;
+  } catch (error) {
+    console.error('Erreur formulaire nouvel album:', error);
+    res.status(500).render('errors/500', {
+      title: 'Erreur',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
+      message: 'Une erreur est survenue',
+    });
+  }
+});
+
+// Créer un nouvel album
+router.post('/galerie/nouveau', upload.array('images', 20), async (req, res) => {
+  try {
+    const { title, description, type, event, isPublic, isFeatured, tags } = req.body;
+
+    // Préparer les items (images)
+    const items = req.files ? req.files.map((file, index) => ({
+      url: `/uploads/${file.filename}`,
+      thumbnail: `/uploads/${file.filename}`,
+      caption: req.body[`caption_${index}`] || '',
+      order: index,
+    })) : [];
+
+    const gallery = new Gallery({
+      title,
+      description,
+      type,
+      items,
+      event: event || null,
+      isPublic: isPublic === 'on',
+      isFeatured: isFeatured === 'on',
+      tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
+      createdBy: req.session.user._id,
+    });
+
+    await gallery.save();
+
+    req.session.successMessage = 'Album créé avec succès';
+    res.redirect('/admin/galerie');
+  } catch (error) {
+    console.error('Erreur création album:', error);
+    req.session.errorMessage = 'Erreur lors de la création de l\'album';
+    res.redirect('/admin/galerie/nouveau');
+  }
+});
+
+// Formulaire modifier album
+router.get('/galerie/:id/modifier', async (req, res) => {
+  try {
+    const gallery = await Gallery.findById(req.params.id);
+    const events = await Event.find().sort({ startDate: -1 });
+
+    if (!gallery) {
+      req.session.errorMessage = 'Album non trouvé';
+      return res.redirect('/admin/galerie');
+    }
+
+    res.render('admin/galerie/form', {
+      title: 'Modifier l\'album',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
+      currentPage: 'galerie',
+      gallery,
+      events,
+      successMessage: req.session.successMessage || null,
+      errorMessage: req.session.errorMessage || null,
+    });
+
+    delete req.session.successMessage;
+    delete req.session.errorMessage;
+  } catch (error) {
+    console.error('Erreur formulaire modifier album:', error);
+    res.status(500).render('errors/500', {
+      title: 'Erreur',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
+      message: 'Une erreur est survenue',
+    });
+  }
+});
+
+// Mettre à jour un album
+router.post('/galerie/:id/modifier', upload.array('images', 20), async (req, res) => {
+  try {
+    const { title, description, type, event, isPublic, isFeatured, tags } = req.body;
+    const gallery = await Gallery.findById(req.params.id);
+
+    if (!gallery) {
+      req.session.errorMessage = 'Album non trouvé';
+      return res.redirect('/admin/galerie');
+    }
+
+    // Ajouter nouvelles images
+    if (req.files && req.files.length > 0) {
+      const newItems = req.files.map((file, index) => ({
+        url: `/uploads/${file.filename}`,
+        thumbnail: `/uploads/${file.filename}`,
+        caption: req.body[`caption_${index}`] || '',
+        order: gallery.items.length + index,
+      }));
+      gallery.items.push(...newItems);
+    }
+
+    gallery.title = title;
+    gallery.description = description;
+    gallery.type = type;
+    gallery.event = event || null;
+    gallery.isPublic = isPublic === 'on';
+    gallery.isFeatured = isFeatured === 'on';
+    gallery.tags = tags ? tags.split(',').map(tag => tag.trim()) : [];
+
+    await gallery.save();
+
+    req.session.successMessage = 'Album modifié avec succès';
+    res.redirect('/admin/galerie');
+  } catch (error) {
+    console.error('Erreur modification album:', error);
+    req.session.errorMessage = 'Erreur lors de la modification de l\'album';
+    res.redirect(`/admin/galerie/${req.params.id}/modifier`);
+  }
+});
+
+// Supprimer un album
+router.post('/galerie/:id/supprimer', async (req, res) => {
+  try {
+    await Gallery.findByIdAndDelete(req.params.id);
+    req.session.successMessage = 'Album supprimé avec succès';
+    res.redirect('/admin/galerie');
+  } catch (error) {
+    console.error('Erreur suppression album:', error);
+    req.session.errorMessage = 'Erreur lors de la suppression de l\'album';
+    res.redirect('/admin/galerie');
   }
 });
 
@@ -695,6 +837,10 @@ router.get('/articles/nouveau', async (req, res) => {
       article: {},
       successMessage: req.session.successMessage || null,
       errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
 
     delete req.session.successMessage;
@@ -725,6 +871,10 @@ router.get('/articles/:id/modifier', async (req, res) => {
       article,
       successMessage: req.session.successMessage || null,
       errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
 
     delete req.session.successMessage;
@@ -762,6 +912,10 @@ router.get('/evenements/nouveau', async (req, res) => {
       event: {},
       successMessage: req.session.successMessage || null,
       errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
 
     delete req.session.successMessage;
@@ -792,6 +946,10 @@ router.get('/evenements/:id/modifier', async (req, res) => {
       event,
       successMessage: req.session.successMessage || null,
       errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
 
     delete req.session.successMessage;

@@ -6,20 +6,29 @@ const Gallery = require('../models/Gallery');
 router.get('/', async (req, res) => {
   try {
     const type = req.query.type; // photo ou video
+    const page = parseInt(req.query.page) || 1;
+    const limit = 24;
+    const skip = (page - 1) * limit;
 
     const filter = { isPublic: true };
     if (type) {
       filter.type = type;
     }
 
+    const totalGalleries = await Gallery.countDocuments(filter);
+    const totalPages = Math.ceil(totalGalleries / limit);
+
     const galleries = await Gallery.find(filter)
       .sort({ date: -1 })
-      .limit(24);
+      .skip(skip)
+      .limit(limit);
 
     res.render('galerie/index', {
       title: 'Galerie',
       galleries,
       currentType: type || 'all',
+      currentPage: page,
+      totalPages: totalPages,
     });
   } catch (error) {
     console.error('Erreur galerie:', error);
