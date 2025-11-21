@@ -5,21 +5,19 @@ exports.handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     req.session.errorMessage = errors.array()[0].msg;
-    return res.redirect('back');
+    return res.redirect(req.get('Referrer') || '/');
   }
   next();
 };
 
-// Validation pour l'inscription
+// Validation pour l'inscription (simplifiée)
 exports.validateRegistration = [
   body('firstName')
     .trim()
-    .notEmpty().withMessage('Le prénom est requis')
-    .isLength({ min: 2 }).withMessage('Le prénom doit contenir au moins 2 caractères'),
+    .notEmpty().withMessage('Le prénom est requis'),
   body('lastName')
     .trim()
-    .notEmpty().withMessage('Le nom est requis')
-    .isLength({ min: 2 }).withMessage('Le nom doit contenir au moins 2 caractères'),
+    .notEmpty().withMessage('Le nom est requis'),
   body('email')
     .trim()
     .notEmpty().withMessage('L\'email est requis')
@@ -27,17 +25,13 @@ exports.validateRegistration = [
     .normalizeEmail(),
   body('password')
     .notEmpty().withMessage('Le mot de passe est requis')
-    .isLength({ min: 6 }).withMessage('Le mot de passe doit contenir au moins 6 caractères')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
-    .withMessage('Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre'),
+    .isLength({ min: 4 }).withMessage('Le mot de passe doit contenir au moins 4 caractères'),
   body('confirmPassword')
     .notEmpty().withMessage('Veuillez confirmer le mot de passe')
     .custom((value, { req }) => value === req.body.password)
     .withMessage('Les mots de passe ne correspondent pas'),
   body('phone')
-    .optional()
-    .matches(/^(\+221)?[0-9]{9}$/)
-    .withMessage('Numéro de téléphone invalide (format: +221XXXXXXXXX ou XXXXXXXXX)'),
+    .optional(),
 ];
 
 // Validation pour la connexion
