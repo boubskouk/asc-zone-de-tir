@@ -113,7 +113,14 @@ body {
    HERO SLIDER
    =========================== */
 .hero-slider .carousel-item {
-    min-height: 600px;
+    min-height: 100vh;
+}
+
+.hero-slider .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
 }
 
 .hero-slider .carousel-fade .carousel-item {
