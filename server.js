@@ -70,11 +70,12 @@ app.use(session({
     mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/asc-zone-de-tir',
     touchAfter: 24 * 3600,
   }),
+  proxy: process.env.NODE_ENV === 'production', // Trust Render's proxy
   cookie: {
-    secure: !isDev,
+    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
     maxAge: parseInt(process.env.SESSION_MAX_AGE || 86400000),
-    sameSite: 'strict',
+    sameSite: 'lax', // Changed from 'strict' to 'lax' for better compatibility
   },
 }));
 
