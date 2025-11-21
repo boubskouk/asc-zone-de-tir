@@ -3,6 +3,7 @@ const router = express.Router();
 const Article = require('../models/Article');
 const Event = require('../models/Event');
 const Gallery = require('../models/Gallery');
+const Activity = require('../models/Activity');
 
 // Page d'accueil
 router.get('/', async (req, res) => {
@@ -39,12 +40,18 @@ router.get('/', async (req, res) => {
       .sort({ date: -1 })
       .limit(3);
 
+    // Activités sportives
+    const activities = await Activity.find({ isActive: true })
+      .sort({ displayOrder: 1, createdAt: -1 })
+      .limit(6);
+
     res.render('index', {
       title: 'Accueil',
       articles,
       events,
       featuredArticles,
       featuredGalleries,
+      activities,
     });
   } catch (error) {
     console.error('Erreur page d\'accueil:', error);

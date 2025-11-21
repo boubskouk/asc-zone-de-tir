@@ -436,3 +436,110 @@ body {
     height: 1rem;
     border-width: 0.15em;
 }
+
+/* ===========================
+   ACTIVITIES SLIDER
+   =========================== */
+.activities-slider {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.activities-slider .carousel-item {
+    padding: 2rem 0;
+    min-height: 500px;
+}
+
+.activity-image {
+    height: 450px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.activity-image:hover {
+    transform: scale(1.02);
+}
+
+.activity-content {
+    padding: 2rem 0;
+}
+
+.activity-content h3 {
+    color: var(--dark-color);
+    font-size: 2rem;
+}
+
+.activity-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Personnalisation des contrôles du carousel */
+.activities-slider .carousel-control-prev,
+.activities-slider .carousel-control-next {
+    width: 5%;
+    opacity: 0.8;
+}
+
+.activities-slider .carousel-control-prev:hover,
+.activities-slider .carousel-control-next:hover {
+    opacity: 1;
+}
+
+.activities-slider .carousel-control-prev-icon,
+.activities-slider .carousel-control-next-icon {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.activities-slider .carousel-indicators {
+    margin-bottom: -2rem;
+}
+
+.activities-slider .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.activities-slider .carousel-indicators button.active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Responsive pour le slider */
+@media (max-width: 768px) {
+    .activities-slider .carousel-item {
+        min-height: 400px;
+        padding: 1rem 0;
+    }
+
+    .activity-image {
+        height: 300px;
+        margin-bottom: 1.5rem;
+    }
+
+    .activity-content {
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+    .activity-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .activity-content p {
+        font-size: 1rem;
+    }
+
+    .activities-slider .col-md-6.px-5 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
