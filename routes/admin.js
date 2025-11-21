@@ -770,6 +770,10 @@ router.get('/membres/nouveau', async (req, res) => {
       member: {},
       successMessage: req.session.successMessage || null,
       errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
 
     delete req.session.successMessage;
@@ -800,6 +804,10 @@ router.get('/membres/:id/modifier', async (req, res) => {
       member,
       successMessage: req.session.successMessage || null,
       errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
     });
 
     delete req.session.successMessage;

@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(findstr node:*)",
+      "Bash(node scripts/create-test-users.js:*)"
     ],
     "deny": [],
     "ask": []

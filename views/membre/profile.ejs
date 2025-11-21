@@ -36,9 +36,9 @@
                                  class="rounded-circle me-4" width="120" height="120"
                                  onerror="this.src='https://ui-avatars.com/api/?name=<%= user.firstName %>+<%= user.lastName %>&size=120&background=1e40af&color=fff'">
                             <div>
-                                <form action="/membre/profil/photo" method="POST" enctype="multipart/form-data">
+                                <form action="/membre/profil/photo" method="POST" enctype="multipart/form-data" onsubmit="console.log('Formulaire soumis')">
                                     <div class="mb-2">
-                                        <input type="file" class="form-control" name="profilePhoto" accept="image/*" required>
+                                        <input type="file" class="form-control" name="profilePhoto" accept="image/*" required id="fileInput" onchange="console.log('Fichier sélectionné:', this.files[0])">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-sm">
                                         <i class="bi bi-upload me-2"></i>Télécharger
