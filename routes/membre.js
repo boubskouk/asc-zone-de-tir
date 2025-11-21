@@ -114,10 +114,20 @@ router.post('/profil', async (req, res) => {
 // Upload photo de profil
 router.post(
   '/profil/photo',
-  upload.single('profilePhoto'),
-  handleUploadError,
+  (req, res, next) => {
+    upload.single('profilePhoto')(req, res, (err) => {
+      if (err) {
+        console.error('Erreur Multer:', err);
+        req.session.errorMessage = err.message || 'Erreur lors de l\'upload du fichier.';
+        return res.redirect('/membre/profil');
+      }
+      next();
+    });
+  },
   async (req, res) => {
     try {
+      console.log('Fichier reçu:', req.file);
+
       if (!req.file) {
         req.session.errorMessage = 'Aucun fichier sélectionné.';
         return res.redirect('/membre/profil');
@@ -130,6 +140,7 @@ router.post(
       // Mettre à jour la session
       req.session.user.profilePhoto = user.profilePhoto;
 
+      console.log('Photo enregistrée:', user.profilePhoto);
       req.session.successMessage = 'Photo de profil mise à jour.';
       res.redirect('/membre/profil');
     } catch (error) {
