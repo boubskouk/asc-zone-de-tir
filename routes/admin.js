@@ -137,6 +137,40 @@ router.get('/membres/nouveau', async (req, res) => {
   }
 });
 
+// Formulaire modification membre (DOIT être avant /membres/:id)
+router.get('/membres/:id/modifier', async (req, res) => {
+  try {
+    const member = await User.findById(req.params.id);
+
+    if (!member) {
+      req.session.errorMessage = 'Membre introuvable.';
+      return res.redirect('/admin/membres');
+    }
+
+    res.render('admin/membres/edit', {
+      title: 'Modifier le membre',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
+      member,
+      successMessage: req.session.successMessage || null,
+      errorMessage: req.session.errorMessage || null,
+      currentPath: req.path,
+      isAuthenticated: req.session.user ? true : false,
+      user: req.session.user || {},
+      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
+    });
+
+    delete req.session.successMessage;
+    delete req.session.errorMessage;
+  } catch (error) {
+    console.error('Erreur:', error);
+    res.status(500).render('errors/500', {
+      title: 'Erreur',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
+      message: 'Une erreur est survenue',
+    });
+  }
+});
+
 router.get('/membres/:id', async (req, res) => {
   try {
     const member = await User.findById(req.params.id);
@@ -786,40 +820,6 @@ router.post('/contacts/:id/supprimer', async (req, res) => {
 });
 
 // ==================== ROUTES CRUD MANQUANTES ====================
-
-// Formulaire modification membre
-router.get('/membres/:id/modifier', async (req, res) => {
-  try {
-    const member = await User.findById(req.params.id);
-
-    if (!member) {
-      req.session.errorMessage = 'Membre introuvable.';
-      return res.redirect('/admin/membres');
-    }
-
-    res.render('admin/membres/edit', {
-      title: 'Modifier le membre',
-      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
-      member,
-      successMessage: req.session.successMessage || null,
-      errorMessage: req.session.errorMessage || null,
-      currentPath: req.path,
-      isAuthenticated: req.session.user ? true : false,
-      user: req.session.user || {},
-      isAdmin: req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'moderator'),
-    });
-
-    delete req.session.successMessage;
-    delete req.session.errorMessage;
-  } catch (error) {
-    console.error('Erreur:', error);
-    res.status(500).render('errors/500', {
-      title: 'Erreur',
-      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
-      message: 'Une erreur est survenue',
-    });
-  }
-});
 
 // Supprimer un membre
 router.post('/membres/:id/supprimer', async (req, res) => {
