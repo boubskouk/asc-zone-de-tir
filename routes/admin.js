@@ -146,14 +146,13 @@ router.get('/membres/:id', async (req, res) => {
       return res.redirect('/admin/membres');
     }
 
-    res.render('admin/membres/detail', {
-      title: `${member.fullName}`,
-      member,
-    });
+    // Rediriger vers la page d'édition au lieu d'une page de détail
+    res.redirect(`/admin/membres/${req.params.id}/modifier`);
   } catch (error) {
     console.error('Erreur détail membre:', error);
     res.status(500).render('errors/500', {
       title: 'Erreur',
+      siteName: process.env.SITE_NAME || 'ASC Zone de Tir',
       message: 'Une erreur est survenue',
     });
   }
