@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <meta name="description" content="<%= article.excerpt %>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-light py-3">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="/actualites">Actualités</a></li>
+                <li class="breadcrumb-item active"><%= article.title %></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- Header -->
+                    <div class="mb-4">
+                        <span class="badge bg-primary mb-2"><%= article.category %></span>
+                        <h1 class="display-5 fw-bold mb-3"><%= article.title %></h1>
+
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <% if (article.author) { %>
+                                <img src="<%= article.author.profilePhoto || '/images/default-avatar.png' %>"
+                                     alt="<%= article.author.firstName %>"
+                                     class="rounded-circle me-2"
+                                     width="40"
+                                     height="40"
+                                     onerror="this.src='https://ui-avatars.com/api/?name=<%= article.author.firstName %>+<%= article.author.lastName %>&size=40&background=1e40af&color=fff'">
+                                <div>
+                                    <small class="d-block">
+                                        Par <strong><%= article.author.firstName %> <%= article.author.lastName %></strong>
+                                    </small>
+                                    <small>
+                                        <i class="bi bi-calendar me-1"></i>
+                                        <%= new Date(article.publishedAt).toLocaleDateString('fr-FR', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        }) %>
+                                        <i class="bi bi-eye ms-3 me-1"></i>
+                                        <%= article.views %> vues
+                                    </small>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Tags -->
+                        <% if (article.tags && article.tags.length > 0) { %>
+                            <div class="mb-3">
+                                <% article.tags.forEach(tag => { %>
+                                    <span class="badge bg-light text-dark me-1">
+                                        <i class="bi bi-tag me-1"></i><%= tag %>
+                                    </span>
+                                <% }); %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <!-- Featured Image -->
+                    <% if (article.featuredImage) { %>
+                        <img src="<%= article.featuredImage %>"
+                             alt="<%= article.title %>"
+                             class="img-fluid rounded shadow-sm mb-4"
+                             onerror="this.src='https://placehold.co/800x400/1e40af/white?text=<%= encodeURIComponent(article.title) %>'">
+                    <% } %>
+
+                    <!-- Content -->
+                    <div class="article-content">
+                        <%- article.content %>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="border-top border-bottom py-4 my-4">
+                        <h6 class="fw-bold mb-3">Partager cet article</h6>
+                        <div class="d-flex gap-2">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<%= baseUrl %>/actualites/<%= article.slug %>"
+                               target="_blank"
+                               class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-facebook"></i> Facebook
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?url=<%= baseUrl %>/actualites/<%= article.slug %>&text=<%= encodeURIComponent(article.title) %>"
+                               target="_blank"
+                               class="btn btn-outline-info btn-sm">
+                                <i class="bi bi-twitter"></i> Twitter
+                            </a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<%= baseUrl %>/actualites/<%= article.slug %>"
+                               target="_blank"
+                               class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Related Articles -->
+                    <% if (relatedArticles && relatedArticles.length > 0) { %>
+                        <div class="mt-5">
+                            <h4 class="fw-bold mb-4">Articles similaires</h4>
+                            <div class="row g-3">
+                                <% relatedArticles.forEach(related => { %>
+                                    <div class="col-md-4">
+                                        <div class="card h-100 shadow-sm">
+                                            <% if (related.featuredImage) { %>
+                                                <img src="<%= related.featuredImage %>"
+                                                     class="card-img-top"
+                                                     alt="<%= related.title %>"
+                                                     style="height: 150px; object-fit: cover;"
+                                                     onerror="this.src='https://placehold.co/400x150/1e40af/white?text=Article'">
+                                            <% } else { %>
+                                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                                                     style="height: 150px;">
+                                                    <i class="bi bi-newspaper text-muted" style="font-size: 2rem;"></i>
+                                                </div>
+                                            <% } %>
+                                            <div class="card-body">
+                                                <h6 class="card-title">
+                                                    <a href="/actualites/<%= related.slug %>"
+                                                       class="text-decoration-none text-dark">
+                                                        <%= related.title %>
+                                                    </a>
+                                                </h6>
+                                                <small class="text-muted">
+                                                    <%= new Date(related.publishedAt).toLocaleDateString('fr-FR') %>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

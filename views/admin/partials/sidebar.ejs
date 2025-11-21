@@ -1,0 +1,38 @@
+<nav class="col-md-2 bg-dark text-white min-vh-100 px-0">
+    <div class="p-3">
+        <h5 class="text-center mb-4">
+            <i class="bi bi-shield-check me-2"></i>Administration
+        </h5>
+
+        <div class="nav flex-column">
+            <a href="/admin/dashboard" class="nav-link <%= currentPage === 'dashboard' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-speedometer2 me-2"></i>Tableau de bord
+            </a>
+            <a href="/admin/membres" class="nav-link <%= currentPage === 'membres' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-people me-2"></i>Membres
+            </a>
+            <a href="/admin/articles" class="nav-link <%= currentPage === 'articles' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-newspaper me-2"></i>Articles
+            </a>
+            <a href="/admin/evenements" class="nav-link <%= currentPage === 'evenements' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-calendar-event me-2"></i>Événements
+            </a>
+            <a href="/admin/resultats" class="nav-link <%= currentPage === 'resultats' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-trophy me-2"></i>Résultats
+            </a>
+            <a href="/admin/galerie" class="nav-link <%= currentPage === 'galerie' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-images me-2"></i>Galerie
+            </a>
+            <a href="/admin/contacts" class="nav-link <%= currentPage === 'contacts' ? 'active text-white' : 'text-white-50' %>">
+                <i class="bi bi-envelope me-2"></i>Messages
+                <% if (typeof stats !== 'undefined' && stats.contacts > 0) { %>
+                    <span class="badge bg-danger"><%= stats.contacts %></span>
+                <% } %>
+            </a>
+            <hr class="bg-white">
+            <a href="/" class="nav-link text-white-50">
+                <i class="bi bi-house me-2"></i>Retour au site
+            </a>
+        </div>
+    </div>
+</nav>

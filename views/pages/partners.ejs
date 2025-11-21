@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <!-- Hero -->
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center py-4">
+            <h1 class="display-4 fw-bold mb-3">Nos partenaires</h1>
+            <p class="lead">Ils nous font confiance et soutiennent nos actions</p>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="lead text-muted">
+                        L'ASC Zone de Tir est fière de collaborer avec des partenaires qui partagent
+                        nos valeurs et contribuent au développement du tir sportif et de la culture au Sénégal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partenaires institutionnels -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Partenaires institutionnels</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded p-3 me-3">
+                                    <i class="bi bi-building fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">Fédération Sénégalaise de Tir Sportif</h5>
+                                    <small class="text-muted">Partenaire depuis 1995</small>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">
+                                Notre affiliation à la fédération nous permet de participer aux compétitions
+                                nationales et de bénéficier d'un encadrement technique de qualité.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded p-3 me-3">
+                                    <i class="bi bi-flag fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">Ministère des Sports</h5>
+                                    <small class="text-muted">Support institutionnel</small>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">
+                                Le soutien du ministère des Sports nous permet de développer nos infrastructures
+                                et d'organiser des événements d'envergure nationale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded p-3 me-3">
+                                    <i class="bi bi-award fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">Comité National Olympique</h5>
+                                    <small class="text-muted">Reconnaissance officielle</small>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">
+                                Notre reconnaissance par le CNO témoigne de notre engagement pour l'excellence
+                                sportive et le fair-play.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded p-3 me-3">
+                                    <i class="bi bi-globe fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">Confédération Africaine de Tir</h5>
+                                    <small class="text-muted">Membre actif</small>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">
+                                Notre appartenance à la CAT favorise les échanges avec d'autres pays africains
+                                et la participation aux compétitions continentales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partenaires privés -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Partenaires privés</h2>
+
+            <div class="row g-4 align-items-center text-center">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+1"
+                             alt="Partenaire 1" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+2"
+                             alt="Partenaire 2" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+3"
+                             alt="Partenaire 3" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+4"
+                             alt="Partenaire 4" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+5"
+                             alt="Partenaire 5" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+6"
+                             alt="Partenaire 6" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+7"
+                             alt="Partenaire 7" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="p-4 border rounded bg-white">
+                        <img src="https://via.placeholder.com/150x80/f8f9fa/1e40af?text=Logo+Partenaire+8"
+                             alt="Partenaire 8" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Devenir partenaire -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="h3 fw-bold mb-4">Devenez partenaire</h2>
+                    <p class="text-muted mb-4">
+                        En devenant partenaire de l'ASC Zone de Tir, vous soutenez le développement du
+                        sport et de la culture au Sénégal tout en bénéficiant d'une visibilité auprès de
+                        notre communauté.
+                    </p>
+
+                    <h5 class="fw-bold mb-3">Les avantages</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Visibilité sur notre site web et nos réseaux sociaux
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Logo sur nos supports de communication
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Présence lors de nos événements
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Accès privilégié à nos installations
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Possibilité de team building pour vos équipes
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-4">Formules de partenariat</h5>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong class="text-primary">Bronze</strong>
+                                    <span class="badge bg-secondary">500 000 FCFA/an</span>
+                                </div>
+                                <small class="text-muted">Logo sur le site + Réseaux sociaux</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong class="text-primary">Argent</strong>
+                                    <span class="badge bg-secondary">1 000 000 FCFA/an</span>
+                                </div>
+                                <small class="text-muted">Bronze + Logo sur supports événements</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong class="text-primary">Or</strong>
+                                    <span class="badge bg-warning text-dark">2 000 000 FCFA/an</span>
+                                </div>
+                                <small class="text-muted">Argent + Naming d'un événement majeur</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong class="text-primary">Platine</strong>
+                                    <span class="badge bg-dark">Sur devis</span>
+                                </div>
+                                <small class="text-muted">Partenariat sur mesure</small>
+                            </div>
+
+                            <a href="/contact" class="btn btn-primary w-100">
+                                <i class="bi bi-envelope me-2"></i>Nous contacter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Ils témoignent</h2>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="bi bi-quote text-primary fs-1"></i>
+                            </div>
+                            <p class="text-muted mb-4">
+                                "Notre partenariat avec l'ASC Zone de Tir nous permet de soutenir le développement
+                                du sport au Sénégal tout en renforçant notre image de marque."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=DG&size=50&background=1e40af&color=fff"
+                                     alt="DG" class="rounded-circle me-3">
+                                <div>
+                                    <strong class="d-block">Prénom NOM</strong>
+                                    <small class="text-muted">DG Entreprise XYZ</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="bi bi-quote text-primary fs-1"></i>
+                            </div>
+                            <p class="text-muted mb-4">
+                                "L'ASC Zone de Tir est un partenaire de confiance. Leur professionnalisme
+                                et leur engagement sont remarquables."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=PDG&size=50&background=1e40af&color=fff"
+                                     alt="PDG" class="rounded-circle me-3">
+                                <div>
+                                    <strong class="d-block">Prénom NOM</strong>
+                                    <small class="text-muted">PDG Société ABC</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="bi bi-quote text-primary fs-1"></i>
+                            </div>
+                            <p class="text-muted mb-4">
+                                "Une association dynamique qui porte haut les valeurs du sport et de la culture.
+                                Nous sommes fiers de les accompagner."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=CEO&size=50&background=1e40af&color=fff"
+                                     alt="CEO" class="rounded-circle me-3">
+                                <div>
+                                    <strong class="d-block">Prénom NOM</strong>
+                                    <small class="text-muted">CEO Groupe 123</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

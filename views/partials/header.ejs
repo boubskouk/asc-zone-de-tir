@@ -1,0 +1,98 @@
+<header class="header">
+    <!-- Top Bar -->
+    <div class="top-bar bg-primary text-white py-2 d-none d-md-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <small>
+                        <i class="bi bi-envelope me-2"></i>contact@asczondetir.sn
+                        <i class="bi bi-telephone ms-3 me-2"></i>+221 XX XXX XX XX
+                    </small>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="<%= process.env.FACEBOOK_URL || '#' %>" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="<%= process.env.INSTAGRAM_URL || '#' %>" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="<%= process.env.TWITTER_URL || '#' %>" class="text-white"><i class="bi bi-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="bi bi-bullseye text-primary"></i>
+                ASC ZONE DE TIR
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPath === '/' ? 'active' : '' %>" href="/">Accueil</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Présentation
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/qui-sommes-nous">Qui sommes-nous ?</a></li>
+                            <li><a class="dropdown-item" href="/activites">Nos activités</a></li>
+                            <li><a class="dropdown-item" href="/partenaires">Partenaires</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPath.startsWith('/actualites') ? 'active' : '' %>" href="/actualites">Actualités</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPath.startsWith('/evenements') ? 'active' : '' %>" href="/evenements">Événements</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPath.startsWith('/resultats') ? 'active' : '' %>" href="/resultats">Résultats</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPath.startsWith('/galerie') ? 'active' : '' %>" href="/galerie">Galerie</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPath.startsWith('/contact') ? 'active' : '' %>" href="/contact">Contact</a>
+                    </li>
+
+                    <% if (isAuthenticated) { %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> <%= user.firstName %>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/membre/dashboard">Mon espace</a></li>
+                                <li><a class="dropdown-item" href="/membre/profil">Mon profil</a></li>
+                                <% if (isAdmin) { %>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/admin/dashboard">Administration</a></li>
+                                <% } %>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/auth/logout">Déconnexion</a></li>
+                            </ul>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/login">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm ms-2" href="/adherer">Nous rejoindre</a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <%- include('partials/sidebar', { currentPage: 'profile' }) %>
+            </div>
+
+            <div class="col-md-9">
+                <h2 class="fw-bold mb-4">Mon profil</h2>
+
+                <% if (successMessage) { %>
+                    <div class="alert alert-success"><%= successMessage %></div>
+                <% } %>
+                <% if (errorMessage) { %>
+                    <div class="alert alert-danger"><%= errorMessage %></div>
+                <% } %>
+
+                <!-- Photo de profil -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-3">Photo de profil</h5>
+                        <div class="d-flex align-items-center">
+                            <img src="<%= user.profilePhoto %>" alt="<%= user.firstName %>"
+                                 class="rounded-circle me-4" width="120" height="120"
+                                 onerror="this.src='https://ui-avatars.com/api/?name=<%= user.firstName %>+<%= user.lastName %>&size=120&background=1e40af&color=fff'">
+                            <div>
+                                <form action="/membre/profil/photo" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-2">
+                                        <input type="file" class="form-control" name="profilePhoto" accept="image/*" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-upload me-2"></i>Télécharger
+                                    </button>
+                                </form>
+                                <small class="text-muted d-block mt-2">Format: JPG, PNG. Max: 5MB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informations personnelles -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-4">Informations personnelles</h5>
+                        <form action="/membre/profil" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">Prénom</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                           value="<%= user.firstName %>" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName"
+                                           value="<%= user.lastName %>" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" value="<%= user.email %>" disabled>
+                                    <small class="text-muted">L'email ne peut pas être modifié</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone"
+                                           value="<%= user.phone || '' %>" placeholder="+221 XX XXX XX XX">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dateOfBirth" class="form-label">Date de naissance</label>
+                                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                                           value="<%= user.dateOfBirth ? new Date(user.dateOfBirth).toISOString().split('T')[0] : '' %>">
+                                </div>
+                            </div>
+
+                            <h6 class="fw-bold mt-4 mb-3">Adresse</h6>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="street" class="form-label">Rue</label>
+                                    <input type="text" class="form-control" id="street" name="street"
+                                           value="<%= user.address?.street || '' %>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="city" class="form-label">Ville</label>
+                                    <input type="text" class="form-control" id="city" name="city"
+                                           value="<%= user.address?.city || '' %>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="postalCode" class="form-label">Code postal</label>
+                                    <input type="text" class="form-control" id="postalCode" name="postalCode"
+                                           value="<%= user.address?.postalCode || '' %>">
+                                </div>
+                            </div>
+
+                            <h6 class="fw-bold mt-4 mb-3">Contact d'urgence</h6>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="emergencyName" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="emergencyName" name="emergencyName"
+                                           value="<%= user.emergencyContact?.name || '' %>">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="emergencyPhone" class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone"
+                                           value="<%= user.emergencyContact?.phone || '' %>">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="emergencyRelationship" class="form-label">Lien de parenté</label>
+                                    <input type="text" class="form-control" id="emergencyRelationship" name="emergencyRelationship"
+                                           value="<%= user.emergencyContact?.relationship || '' %>" placeholder="Ex: Conjoint, Parent">
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle me-2"></i>Enregistrer les modifications
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Informations de compte -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-3">Informations de compte</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <strong>Numéro d'adhérent:</strong><br>
+                                <%= user.membershipNumber || 'Non attribué' %>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>Statut:</strong><br>
+                                <span class="badge <%= user.membershipStatus === 'active' ? 'bg-success' : 'bg-warning' %>">
+                                    <%= user.membershipStatus %>
+                                </span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>Membre depuis:</strong><br>
+                                <%= new Date(user.createdAt).toLocaleDateString('fr-FR') %>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>Disciplines:</strong><br>
+                                <% if (user.disciplines && user.disciplines.length > 0) { %>
+                                    <%= user.disciplines.join(', ') %>
+                                <% } else { %>
+                                    Aucune
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

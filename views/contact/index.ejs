@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <!-- Hero -->
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center py-4">
+            <h1 class="display-4 fw-bold mb-3">Contactez-nous</h1>
+            <p class="lead">Nous sommes à votre écoute</p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Formulaire -->
+                <div class="col-lg-7">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="h5 fw-bold mb-4">Envoyez-nous un message</h3>
+
+                            <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+                                <div class="alert alert-success">
+                                    <i class="bi bi-check-circle me-2"></i><%= successMessage %>
+                                </div>
+                            <% } %>
+
+                            <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+                                <div class="alert alert-danger">
+                                    <i class="bi bi-exclamation-triangle me-2"></i><%= errorMessage %>
+                                </div>
+                            <% } %>
+
+                            <form action="/contact" method="POST" class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Nom complet <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="phone" class="form-label">Téléphone</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+221 XX XXX XX XX">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label">Sujet <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="subject" name="subject" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-send me-2"></i>Envoyer le message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informations -->
+                <div class="col-lg-5">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-4">Informations de contact</h5>
+
+                            <div class="mb-4">
+                                <div class="d-flex mb-3">
+                                    <div class="text-primary me-3">
+                                        <i class="bi bi-geo-alt fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="d-block mb-1">Adresse</strong>
+                                        <p class="text-muted mb-0">
+                                            Zone de Tir, Route de Rufisque<br>
+                                            Dakar, Sénégal
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mb-3">
+                                    <div class="text-primary me-3">
+                                        <i class="bi bi-telephone fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="d-block mb-1">Téléphone</strong>
+                                        <p class="text-muted mb-0">+221 XX XXX XX XX</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mb-3">
+                                    <div class="text-primary me-3">
+                                        <i class="bi bi-envelope fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="d-block mb-1">Email</strong>
+                                        <p class="text-muted mb-0">contact@asczondetir.sn</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="text-primary me-3">
+                                        <i class="bi bi-clock fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="d-block mb-1">Horaires</strong>
+                                        <p class="text-muted mb-0">
+                                            Lun - Ven: 8h00 - 18h00<br>
+                                            Sam: 9h00 - 13h00<br>
+                                            Dim: Fermé
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h6 class="fw-bold mb-3">Suivez-nous</h6>
+                            <div class="d-flex gap-2">
+                                <a href="<%= process.env.FACEBOOK_URL || '#' %>" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="<%= process.env.INSTAGRAM_URL || '#' %>" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="<%= process.env.TWITTER_URL || '#' %>" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carte Google Maps -->
+                    <div class="card shadow-sm">
+                        <div class="card-body p-0">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15443.123456789!2d-17.4677!3d14.6928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM0LjEiTiAxN8KwMjgnMDMuNyJX!5e0!3m2!1sfr!2ssn!4v1234567890"
+                                width="100%"
+                                height="300"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                class="rounded-bottom">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

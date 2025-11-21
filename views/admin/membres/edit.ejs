@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/header') %>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <%- include('../partials/sidebar', { currentPage: 'membres' }) %>
+
+            <!-- Main Content -->
+            <main class="col-md-10 px-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="/admin/membres">Membres</a></li>
+                        <li class="breadcrumb-item active"><%= member.firstName %> <%= member.lastName %></li>
+                    </ol>
+                </nav>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">
+                        <% if (member._id) { %>
+                            Modifier le membre
+                        <% } else { %>
+                            Nouveau membre
+                        <% } %>
+                    </h2>
+                    <a href="/admin/membres" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Retour
+                    </a>
+                </div>
+
+                <% if (successMessage) { %>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <%= successMessage %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+                <% if (errorMessage) { %>
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <%= errorMessage %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form action="<%= member._id ? '/admin/membres/' + member._id + '/modifier' : '/admin/membres/nouveau' %>" method="POST">
+                            <!-- Informations personnelles -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Informations personnelles</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="firstName" class="form-label">Prénom *</label>
+                                            <input type="text" class="form-control" id="firstName" name="firstName"
+                                                   value="<%= member.firstName || '' %>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="lastName" class="form-label">Nom *</label>
+                                            <input type="text" class="form-control" id="lastName" name="lastName"
+                                                   value="<%= member.lastName || '' %>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">Email *</label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                   value="<%= member.email || '' %>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="phone" class="form-label">Téléphone</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone"
+                                                   value="<%= member.phone || '' %>" placeholder="+221 XX XXX XX XX">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="dateOfBirth" class="form-label">Date de naissance</label>
+                                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                                                   value="<%= member.dateOfBirth ? new Date(member.dateOfBirth).toISOString().split('T')[0] : '' %>">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="gender" class="form-label">Genre</label>
+                                            <select class="form-select" id="gender" name="gender">
+                                                <option value="">Non spécifié</option>
+                                                <option value="male" <%= member.gender === 'male' ? 'selected' : '' %>>Homme</option>
+                                                <option value="female" <%= member.gender === 'female' ? 'selected' : '' %>>Femme</option>
+                                                <option value="other" <%= member.gender === 'other' ? 'selected' : '' %>>Autre</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Statut et rôle -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Statut et permissions</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="membershipNumber" class="form-label">N° Adhérent</label>
+                                            <input type="text" class="form-control" id="membershipNumber" name="membershipNumber"
+                                                   value="<%= member.membershipNumber || '' %>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="membershipStatus" class="form-label">Statut d'adhésion</label>
+                                            <select class="form-select" id="membershipStatus" name="membershipStatus">
+                                                <option value="pending" <%= member.membershipStatus === 'pending' ? 'selected' : '' %>>En attente</option>
+                                                <option value="active" <%= member.membershipStatus === 'active' ? 'selected' : '' %>>Actif</option>
+                                                <option value="expired" <%= member.membershipStatus === 'expired' ? 'selected' : '' %>>Expiré</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="role" class="form-label">Rôle</label>
+                                            <select class="form-select" id="role" name="role">
+                                                <option value="member" <%= member.role === 'member' ? 'selected' : '' %>>Membre</option>
+                                                <option value="moderator" <%= member.role === 'moderator' ? 'selected' : '' %>>Modérateur</option>
+                                                <option value="admin" <%= member.role === 'admin' ? 'selected' : '' %>>Administrateur</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Disciplines</label>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="disciplines" value="pistolet"
+                                                               id="pistolet" <%= member.disciplines && member.disciplines.includes('pistolet') ? 'checked' : '' %>>
+                                                        <label class="form-check-label" for="pistolet">Pistolet</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="disciplines" value="carabine"
+                                                               id="carabine" <%= member.disciplines && member.disciplines.includes('carabine') ? 'checked' : '' %>>
+                                                        <label class="form-check-label" for="carabine">Carabine</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="disciplines" value="tir-sportif"
+                                                               id="tir-sportif" <%= member.disciplines && member.disciplines.includes('tir-sportif') ? 'checked' : '' %>>
+                                                        <label class="form-check-label" for="tir-sportif">Tir sportif</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Adresse -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Adresse</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="street" class="form-label">Rue</label>
+                                            <input type="text" class="form-control" id="street" name="street"
+                                                   value="<%= member.address?.street || '' %>">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="city" class="form-label">Ville</label>
+                                            <input type="text" class="form-control" id="city" name="city"
+                                                   value="<%= member.address?.city || '' %>">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="postalCode" class="form-label">Code postal</label>
+                                            <input type="text" class="form-control" id="postalCode" name="postalCode"
+                                                   value="<%= member.address?.postalCode || '' %>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact d'urgence -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Contact d'urgence</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="emergencyName" class="form-label">Nom</label>
+                                            <input type="text" class="form-control" id="emergencyName" name="emergencyName"
+                                                   value="<%= member.emergencyContact?.name || '' %>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="emergencyPhone" class="form-label">Téléphone</label>
+                                            <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone"
+                                                   value="<%= member.emergencyContact?.phone || '' %>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="emergencyRelationship" class="form-label">Lien de parenté</label>
+                                            <input type="text" class="form-control" id="emergencyRelationship" name="emergencyRelationship"
+                                                   value="<%= member.emergencyContact?.relationship || '' %>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <% if (!member._id) { %>
+                                <!-- Mot de passe (nouveau membre uniquement) -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0">Mot de passe</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="password" class="form-label">Mot de passe *</label>
+                                                <input type="password" class="form-control" id="password" name="password" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="confirmPassword" class="form-label">Confirmer le mot de passe *</label>
+                                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle me-2"></i>Enregistrer
+                                </button>
+                                <a href="/admin/membres" class="btn btn-outline-secondary">Annuler</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Informations supplémentaires (si membre existant) -->
+                    <% if (member._id) { %>
+                        <div class="col-lg-4">
+                            <!-- Photo -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body text-center">
+                                    <img src="<%= member.profilePhoto %>" alt="<%= member.firstName %>"
+                                         class="rounded-circle mb-3" width="150" height="150"
+                                         onerror="this.src='https://ui-avatars.com/api/?name=<%= member.firstName %>+<%= member.lastName %>&size=150'">
+                                    <h5 class="fw-bold"><%= member.firstName %> <%= member.lastName %></h5>
+                                    <p class="text-muted small"><%= member.email %></p>
+                                </div>
+                            </div>
+
+                            <!-- Statistiques -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h6 class="mb-0">Informations</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small mb-2">
+                                        <strong>Membre depuis:</strong><br>
+                                        <%= new Date(member.createdAt).toLocaleDateString('fr-FR') %>
+                                    </p>
+                                    <p class="small mb-2">
+                                        <strong>Dernière connexion:</strong><br>
+                                        <%= member.lastLogin ? new Date(member.lastLogin).toLocaleDateString('fr-FR') : 'Jamais' %>
+                                    </p>
+                                    <p class="small mb-0">
+                                        <strong>Documents:</strong><br>
+                                        <%= member.documents ? member.documents.length : 0 %> document(s)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-white">
+                                    <h6 class="mb-0">Actions rapides</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary btn-sm" onclick="alert('Fonctionnalité à venir')">
+                                            <i class="bi bi-envelope me-2"></i>Envoyer un email
+                                        </button>
+                                        <button class="btn btn-outline-warning btn-sm" onclick="resetPassword('<%= member._id %>')">
+                                            <i class="bi bi-key me-2"></i>Réinitialiser mot de passe
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm" onclick="deleteMember('<%= member._id %>', '<%= member.firstName %> <%= member.lastName %>')">
+                                            <i class="bi bi-trash me-2"></i>Supprimer le membre
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function resetPassword(memberId) {
+            if (confirm('Envoyer un email de réinitialisation du mot de passe ?')) {
+                // Implémenter la logique de réinitialisation
+                alert('Email envoyé (fonctionnalité à implémenter)');
+            }
+        }
+
+        function deleteMember(memberId, memberName) {
+            if (confirm(`Êtes-vous sûr de vouloir supprimer le membre "${memberName}" ?\n\nCette action est irréversible.`)) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/admin/membres/${memberId}/supprimer`;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
+</body>
+</html>

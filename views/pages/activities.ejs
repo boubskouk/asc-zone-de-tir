@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <!-- Hero -->
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center py-4">
+            <h1 class="display-4 fw-bold mb-3">Nos activités</h1>
+            <p class="lead">Découvrez nos disciplines sportives et activités culturelles</p>
+        </div>
+    </section>
+
+    <!-- Activités sportives -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Activités sportives</h2>
+
+            <!-- Carabine -->
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://placehold.co/600x400/1e40af/white?text=Carabine+10m"
+                         alt="Carabine 10m" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <span class="badge bg-primary mb-2">Tir sportif</span>
+                    <h3 class="h4 fw-bold mb-3">Carabine 10 mètres</h3>
+                    <p class="text-muted">
+                        La carabine à 10 mètres est une discipline olympique qui demande concentration,
+                        précision et maîtrise de soi. Discipline accessible à tous les âges, elle est
+                        idéale pour débuter le tir sportif.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Entraînements : Mardi et Jeudi 18h-20h</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Niveau : Débutant à Avancé</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Matériel fourni pour les débutants</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Coach diplômé d'État</li>
+                    </ul>
+                    <a href="/adherer" class="btn btn-primary">
+                        <i class="bi bi-person-plus me-2"></i>S'inscrire
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pistolet -->
+            <div class="row align-items-center mb-5 flex-lg-row-reverse">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://placehold.co/600x400/1e40af/white?text=Pistolet+10m"
+                         alt="Pistolet 10m" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <span class="badge bg-primary mb-2">Tir sportif</span>
+                    <h3 class="h4 fw-bold mb-3">Pistolet 10 mètres</h3>
+                    <p class="text-muted">
+                        Le tir au pistolet à 10 mètres développe la coordination, l'équilibre et la
+                        concentration. Discipline exigeante mais gratifiante, elle offre des sensations
+                        uniques aux tireurs de tous niveaux.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Entraînements : Lundi et Mercredi 18h-20h</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Niveau : Intermédiaire à Expert</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Cours particuliers disponibles</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Préparation compétitions</li>
+                    </ul>
+                    <a href="/adherer" class="btn btn-primary">
+                        <i class="bi bi-person-plus me-2"></i>S'inscrire
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tir de précision -->
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://placehold.co/600x400/1e40af/white?text=Tir+de+Precision"
+                         alt="Tir de précision" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <span class="badge bg-primary mb-2">Tir sportif</span>
+                    <h3 class="h4 fw-bold mb-3">Tir de précision</h3>
+                    <p class="text-muted">
+                        Le tir de précision longue distance requiert technique, patience et analyse.
+                        Cette discipline permet aux tireurs confirmés de perfectionner leur art et de
+                        repousser leurs limites.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Entraînements : Samedi 9h-12h</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Niveau : Avancé</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Distances : 50m et 100m</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Stage de perfectionnement trimestriel</li>
+                    </ul>
+                    <a href="/adherer" class="btn btn-primary">
+                        <i class="bi bi-person-plus me-2"></i>S'inscrire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activités culturelles -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Activités culturelles</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-palette fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Expositions</h5>
+                            <p class="text-muted">
+                                Expositions thématiques sur l'histoire du tir sportif, les armes anciennes
+                                et la culture sénégalaise. Ouvertes au public.
+                            </p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>2 expositions par an
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-music-note-beamed fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Spectacles</h5>
+                            <p class="text-muted">
+                                Soirées culturelles avec spectacles traditionnels, concerts et démonstrations
+                                artistiques. Moments de convivialité et de partage.
+                            </p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>Trimestriellement
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-book fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Conférences</h5>
+                            <p class="text-muted">
+                                Conférences éducatives sur la sécurité, l'histoire du tir, la préparation
+                                mentale et physique des sportifs.
+                            </p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>Mensuellement
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-camera fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Ateliers photo</h5>
+                            <p class="text-muted">
+                                Ateliers de photographie sportive et artistique. Apprenez à capturer
+                                les moments forts des compétitions.
+                            </p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>Bimensuel
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-brush fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Arts créatifs</h5>
+                            <p class="text-muted">
+                                Ateliers de peinture, sculpture et artisanat. Expression artistique
+                                pour tous les âges et tous les talents.
+                            </p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>Hebdomadaire
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-film fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Ciné-club</h5>
+                            <p class="text-muted">
+                                Projections de films sur le sport, documentaires et cinéma d'auteur.
+                                Débats et échanges après chaque séance.
+                            </p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>Mensuel
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jeunes et formation -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">École de tir jeunes</h2>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://placehold.co/600x400/1e40af/white?text=École+de+Tir+Jeunes"
+                         alt="École de tir jeunes" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <p class="text-muted lead mb-4">
+                        Notre école de tir accueille les jeunes de 10 à 18 ans et leur offre
+                        un encadrement de qualité pour découvrir et progresser dans le tir sportif.
+                    </p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="text-primary me-3">
+                                    <i class="bi bi-shield-check fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Sécurité</h6>
+                                    <p class="text-muted small mb-0">
+                                        Formation complète aux règles de sécurité
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="text-primary me-3">
+                                    <i class="bi bi-person-badge fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Encadrement</h6>
+                                    <p class="text-muted small mb-0">
+                                        Moniteurs diplômés et expérimentés
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="text-primary me-3">
+                                    <i class="bi bi-trophy fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Compétitions</h6>
+                                    <p class="text-muted small mb-0">
+                                        Participation aux championnats jeunes
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="text-primary me-3">
+                                    <i class="bi bi-calendar3 fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Horaires adaptés</h6>
+                                    <p class="text-muted small mb-0">
+                                        Mercredi et Samedi après-midi
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/adherer" class="btn btn-primary mt-4">
+                        <i class="bi bi-person-plus me-2"></i>Inscrire mon enfant
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planning -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Planning des activités</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Jour</th>
+                            <th>Horaires</th>
+                            <th>Activité</th>
+                            <th>Public</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lundi</strong></td>
+                            <td>18h00 - 20h00</td>
+                            <td>Pistolet 10m</td>
+                            <td>Intermédiaire / Avancé</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mardi</strong></td>
+                            <td>18h00 - 20h00</td>
+                            <td>Carabine 10m</td>
+                            <td>Tous niveaux</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mercredi</strong></td>
+                            <td>14h00 - 17h00</td>
+                            <td>École de tir jeunes</td>
+                            <td>10-18 ans</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mercredi</strong></td>
+                            <td>18h00 - 20h00</td>
+                            <td>Pistolet 10m</td>
+                            <td>Intermédiaire / Avancé</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jeudi</strong></td>
+                            <td>18h00 - 20h00</td>
+                            <td>Carabine 10m</td>
+                            <td>Tous niveaux</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vendredi</strong></td>
+                            <td>19h00 - 21h00</td>
+                            <td>Activités culturelles</td>
+                            <td>Tous publics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Samedi</strong></td>
+                            <td>09h00 - 12h00</td>
+                            <td>Tir de précision</td>
+                            <td>Avancé</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Samedi</strong></td>
+                            <td>14h00 - 17h00</td>
+                            <td>École de tir jeunes</td>
+                            <td>10-18 ans</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Note :</strong> Le planning peut être modifié en fonction des compétitions et événements.
+                Consultez régulièrement notre calendrier pour rester informé.
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="h3 fw-bold mb-3">Prêt à découvrir nos activités ?</h2>
+            <p class="lead text-muted mb-4">
+                Rejoignez-nous et participez à nos entraînements et événements
+            </p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="/adherer" class="btn btn-primary btn-lg">
+                    <i class="bi bi-person-plus me-2"></i>Devenir membre
+                </a>
+                <a href="/evenements" class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-calendar-event me-2"></i>Voir le calendrier
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

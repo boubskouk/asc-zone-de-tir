@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <!-- Hero -->
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center py-4">
+            <h1 class="display-4 fw-bold mb-3">Rejoignez l'ASC Zone de Tir</h1>
+            <p class="lead">Devenez membre et participez à nos activités sportives et culturelles</p>
+        </div>
+    </section>
+
+    <!-- Pourquoi nous rejoindre -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="h3 fw-bold mb-4">Pourquoi nous rejoindre ?</h2>
+                    <p class="lead text-muted">
+                        L'ASC Zone de Tir est plus qu'une association sportive, c'est une communauté
+                        passionnée qui partage les valeurs du sport, de la culture et de la convivialité.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-trophy fs-1"></i>
+                        </div>
+                        <h5 class="fw-bold">Excellence sportive</h5>
+                        <p class="text-muted">Entraînements de qualité avec des coaches expérimentés</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-people fs-1"></i>
+                        </div>
+                        <h5 class="fw-bold">Communauté</h5>
+                        <p class="text-muted">Rejoignez une famille de passionnés et créez des liens</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-calendar-event fs-1"></i>
+                        </div>
+                        <h5 class="fw-bold">Événements</h5>
+                        <p class="text-muted">Participez à des compétitions et activités culturelles</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-mortarboard fs-1"></i>
+                        </div>
+                        <h5 class="fw-bold">Formation</h5>
+                        <p class="text-muted">Stages de perfectionnement et formations continues</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nos disciplines -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Nos disciplines</h2>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-bullseye fs-1"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Tir sportif</h5>
+                            <p class="card-text text-muted">
+                                Carabine, pistolet, tir de précision. Tous niveaux acceptés,
+                                du débutant au compétiteur confirmé.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-palette fs-1"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Activités culturelles</h5>
+                            <p class="card-text text-muted">
+                                Expositions, spectacles, ateliers créatifs et événements
+                                culturels tout au long de l'année.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-primary mb-3">
+                                <i class="bi bi-heart fs-1"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Vie associative</h5>
+                            <p class="card-text text-muted">
+                                Sorties, rencontres, événements conviviaux pour tisser
+                                des liens au-delà du sport.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Tarifs et cotisations</h2>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h5 class="mb-0 fw-bold">Licence Jeune</h5>
+                            <small>(Moins de 18 ans)</small>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <div class="display-4 fw-bold text-primary mb-3">
+                                25 000 <small class="fs-6">FCFA</small>
+                            </div>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Accès aux entraînements</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Assurance incluse</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Participation aux compétitions</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Activités culturelles</li>
+                            </ul>
+                            <a href="/auth/inscription" class="btn btn-outline-primary w-100">S'inscrire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow border-primary border-2">
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h5 class="mb-0 fw-bold">Licence Adulte</h5>
+                            <small>(Plus de 18 ans)</small>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <div class="display-4 fw-bold text-primary mb-3">
+                                40 000 <small class="fs-6">FCFA</small>
+                            </div>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Accès aux entraînements</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Assurance incluse</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Participation aux compétitions</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Activités culturelles</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Accès espace membre</li>
+                            </ul>
+                            <a href="/auth/inscription" class="btn btn-primary w-100">S'inscrire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-secondary text-white text-center py-3">
+                            <h5 class="mb-0 fw-bold">Membre Bienfaiteur</h5>
+                            <small>(Soutien)</small>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <div class="display-4 fw-bold text-secondary mb-3">
+                                100 000 <small class="fs-6">FCFA</small>
+                            </div>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Tous les avantages Adulte</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Statut privilégié</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Invitations événements VIP</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Reconnaissance publique</li>
+                            </ul>
+                            <a href="/auth/inscription" class="btn btn-outline-secondary w-100">S'inscrire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Note :</strong> La cotisation est valable pour l'année sportive en cours (septembre à août).
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents requis -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="h3 fw-bold text-center mb-5">Documents requis pour l'inscription</h2>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-file-earmark-text text-primary me-2"></i>
+                                    Formulaire d'inscription complété (téléchargeable en ligne)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-card-image text-primary me-2"></i>
+                                    2 photos d'identité récentes
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-file-medical text-primary me-2"></i>
+                                    Certificat médical de non contre-indication à la pratique du tir sportif (moins de 3 mois)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-credit-card text-primary me-2"></i>
+                                    Copie de la carte d'identité nationale ou passeport
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-people text-primary me-2"></i>
+                                    Pour les mineurs : autorisation parentale signée
+                                </li>
+                            </ul>
+
+                            <div class="mt-4 p-3 bg-light rounded">
+                                <h6 class="fw-bold mb-2">
+                                    <i class="bi bi-download me-2"></i>Documents téléchargeables
+                                </h6>
+                                <a href="#" class="btn btn-sm btn-outline-primary me-2 mb-2">
+                                    <i class="bi bi-file-pdf me-1"></i>Formulaire d'inscription
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary me-2 mb-2">
+                                    <i class="bi bi-file-pdf me-1"></i>Règlement intérieur
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary mb-2">
+                                    <i class="bi bi-file-pdf me-1"></i>Autorisation parentale
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-5">
+        <div class="container">
+            <div class="bg-primary text-white rounded p-5 text-center">
+                <h2 class="h3 fw-bold mb-3">Prêt à nous rejoindre ?</h2>
+                <p class="lead mb-4">Inscrivez-vous dès maintenant et commencez votre aventure avec l'ASC Zone de Tir !</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="/auth/inscription" class="btn btn-light btn-lg">
+                        <i class="bi bi-person-plus me-2"></i>S'inscrire en ligne
+                    </a>
+                    <a href="/contact" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-envelope me-2"></i>Nous contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

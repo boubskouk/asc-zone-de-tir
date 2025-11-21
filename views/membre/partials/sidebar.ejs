@@ -1,0 +1,32 @@
+<div class="card shadow-sm mb-3">
+    <div class="card-body text-center">
+        <img src="<%= user.profilePhoto %>" alt="<%= user.firstName %>"
+             class="rounded-circle mb-3" width="100" height="100"
+             onerror="this.src='https://ui-avatars.com/api/?name=<%= user.firstName %>+<%= user.lastName %>&size=100&background=1e40af&color=fff'">
+        <h5 class="fw-bold"><%= user.firstName %> <%= user.lastName %></h5>
+        <p class="text-muted small"><%= user.email %></p>
+        <% if (user.membershipNumber) { %>
+            <p class="badge bg-primary">N° <%= user.membershipNumber %></p>
+        <% } %>
+    </div>
+</div>
+
+<div class="list-group">
+    <a href="/membre/dashboard" class="list-group-item list-group-item-action <%= currentPage === 'dashboard' ? 'active' : '' %>">
+        <i class="bi bi-speedometer2 me-2"></i>Tableau de bord
+    </a>
+    <a href="/membre/profil" class="list-group-item list-group-item-action <%= currentPage === 'profile' ? 'active' : '' %>">
+        <i class="bi bi-person me-2"></i>Mon profil
+    </a>
+    <a href="/membre/evenements" class="list-group-item list-group-item-action <%= currentPage === 'events' ? 'active' : '' %>">
+        <i class="bi bi-calendar-event me-2"></i>Mes événements
+    </a>
+    <a href="/membre/documents" class="list-group-item list-group-item-action <%= currentPage === 'documents' ? 'active' : '' %>">
+        <i class="bi bi-file-text me-2"></i>Mes documents
+    </a>
+    <% if (user.role === 'admin' || user.role === 'moderator') { %>
+        <a href="/admin/dashboard" class="list-group-item list-group-item-action text-danger">
+            <i class="bi bi-shield-check me-2"></i>Administration
+        </a>
+    <% } %>
+</div>

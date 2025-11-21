@@ -1,0 +1,41 @@
+# robots.txt pour ASC Zone de Tir
+
+# Tous les robots
+User-agent: *
+
+# Pages autorisées
+Allow: /
+Allow: /actualites
+Allow: /evenements
+Allow: /resultats
+Allow: /galerie
+Allow: /contact
+Allow: /qui-sommes-nous
+Allow: /activites
+Allow: /partenaires
+
+# Pages interdites
+Disallow: /admin/
+Disallow: /membre/
+Disallow: /auth/
+
+# Fichiers interdits
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /.env
+
+# Sitemap
+Sitemap: https://asczondetir.sn/sitemap.xml
+
+# Crawl-delay (optionnel)
+Crawl-delay: 10
+
+# Robots spécifiques
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

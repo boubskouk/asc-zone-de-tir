@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - <%= siteName %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 8px;
+            aspect-ratio: 1;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            opacity: 0.9;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+        }
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox img, .lightbox video {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+        .lightbox-prev {
+            left: 20px;
+        }
+        .lightbox-next {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <div class="container py-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="/galerie">Galerie</a></li>
+                <li class="breadcrumb-item active"><%= gallery.title %></li>
+            </ol>
+        </nav>
+
+        <div class="mb-4">
+            <h1 class="fw-bold mb-3"><%= gallery.title %></h1>
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="badge bg-secondary">
+                    <% if (gallery.type === 'photo') { %>
+                        <i class="bi bi-camera me-1"></i>Album photo
+                    <% } else { %>
+                        <i class="bi bi-play-circle me-1"></i>Album vidéo
+                    <% } %>
+                </span>
+                <small class="text-muted">
+                    <i class="bi bi-calendar me-1"></i>
+                    <%= new Date(gallery.date || gallery.createdAt).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    }) %>
+                </small>
+                <small class="text-muted">
+                    <i class="bi bi-collection me-1"></i>
+                    <%= gallery.items ? gallery.items.length : 0 %> éléments
+                </small>
+            </div>
+
+            <% if (gallery.description) { %>
+                <p class="text-muted"><%= gallery.description %></p>
+            <% } %>
+        </div>
+
+        <!-- Galerie -->
+        <% if (gallery.items && gallery.items.length > 0) { %>
+            <div class="gallery-grid">
+                <% gallery.items.forEach((item, index) => { %>
+                    <div class="gallery-item" data-index="<%= index %>">
+                        <% if (gallery.type === 'photo') { %>
+                            <img src="<%= item.url %>" alt="<%= item.caption || gallery.title %>"
+                                 onerror="this.src='https://placehold.co/400x400/1e40af/white?text=Image'">
+                        <% } else { %>
+                            <% if (item.thumbnail) { %>
+                                <img src="<%= item.thumbnail %>" alt="<%= item.caption || gallery.title %>"
+                                     onerror="this.src='https://placehold.co/400x400/1e40af/white?text=Video'">
+                            <% } else { %>
+                                <img src="https://placehold.co/400x400/1e40af/white?text=Video" alt="<%= item.caption || gallery.title %>">
+                            <% } %>
+                            <i class="bi bi-play-circle-fill play-icon"></i>
+                        <% } %>
+                    </div>
+                <% }); %>
+            </div>
+
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox">
+                <span class="lightbox-close" id="closeLightbox">&times;</span>
+                <span class="lightbox-nav lightbox-prev" id="prevItem">&#10094;</span>
+                <span class="lightbox-nav lightbox-next" id="nextItem">&#10095;</span>
+                <div id="lightboxContent"></div>
+            </div>
+        <% } else { %>
+            <div class="text-center py-5">
+                <i class="bi bi-images text-muted" style="font-size: 4rem;"></i>
+                <p class="text-muted mt-3">Aucun élément dans cet album</p>
+            </div>
+        <% } %>
+
+        <div class="mt-4">
+            <a href="/galerie" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-2"></i>Retour à la galerie
+            </a>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Lightbox functionality
+        const items = <%- JSON.stringify(gallery.items || []) %>;
+        const galleryType = '<%= gallery.type %>';
+        let currentIndex = 0;
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightboxContent');
+        const closeLightbox = document.getElementById('closeLightbox');
+        const prevItem = document.getElementById('prevItem');
+        const nextItem = document.getElementById('nextItem');
+
+        // Open lightbox
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                currentIndex = parseInt(this.dataset.index);
+                showLightbox();
+            });
+        });
+
+        function showLightbox() {
+            const item = items[currentIndex];
+            lightboxContent.innerHTML = '';
+
+            if (galleryType === 'photo') {
+                const img = document.createElement('img');
+                img.src = item.url;
+                img.alt = item.caption || '';
+                lightboxContent.appendChild(img);
+            } else {
+                const video = document.createElement('video');
+                video.src = item.url;
+                video.controls = true;
+                video.autoplay = true;
+                video.style.maxWidth = '90%';
+                video.style.maxHeight = '90%';
+                lightboxContent.appendChild(video);
+            }
+
+            lightbox.classList.add('active');
+        }
+
+        // Close lightbox
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            const videos = lightboxContent.querySelectorAll('video');
+            videos.forEach(v => v.pause());
+        });
+
+        // Navigate
+        prevItem.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showLightbox();
+        });
+
+        nextItem.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            showLightbox();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+            } else if (e.key === 'ArrowLeft') {
+                prevItem.click();
+            } else if (e.key === 'ArrowRight') {
+                nextItem.click();
+            }
+        });
+
+        // Close on background click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

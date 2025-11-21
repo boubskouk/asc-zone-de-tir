@@ -1,0 +1,97 @@
+<footer class="footer bg-dark text-white pt-5 pb-3 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- À propos -->
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3">
+                    <i class="bi bi-bullseye text-primary"></i>
+                    ASC Zone de Tir
+                </h5>
+                <p class="text-light small">
+                    Association Sportive et Culturelle dédiée à la promotion du tir sportif
+                    et des activités culturelles au Sénégal.
+                </p>
+                <div class="social-links">
+                    <a href="<%= process.env.FACEBOOK_URL || '#' %>" class="text-white me-3">
+                        <i class="bi bi-facebook fs-5"></i>
+                    </a>
+                    <a href="<%= process.env.INSTAGRAM_URL || '#' %>" class="text-white me-3">
+                        <i class="bi bi-instagram fs-5"></i>
+                    </a>
+                    <a href="<%= process.env.TWITTER_URL || '#' %>" class="text-white">
+                        <i class="bi bi-twitter fs-5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Liens rapides -->
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3">Liens rapides</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="/qui-sommes-nous" class="text-light text-decoration-none">
+                            <i class="bi bi-chevron-right small"></i> Qui sommes-nous ?
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/activites" class="text-light text-decoration-none">
+                            <i class="bi bi-chevron-right small"></i> Nos activités
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/actualites" class="text-light text-decoration-none">
+                            <i class="bi bi-chevron-right small"></i> Actualités
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/evenements" class="text-light text-decoration-none">
+                            <i class="bi bi-chevron-right small"></i> Événements
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/adherer" class="text-light text-decoration-none">
+                            <i class="bi bi-chevron-right small"></i> Nous rejoindre
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3">Contact</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="bi bi-geo-alt text-primary me-2"></i>
+                        <small>Zone de Tir, Dakar, Sénégal</small>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-envelope text-primary me-2"></i>
+                        <small>contact@asczondetir.sn</small>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-telephone text-primary me-2"></i>
+                        <small>+221 XX XXX XX XX</small>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-clock text-primary me-2"></i>
+                        <small>Lun - Ven: 8h - 18h</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="border-secondary">
+
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <small>&copy; <%= new Date().getFullYear() %> ASC Zone de Tir. Tous droits réservés.</small>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <small>
+                    <a href="/mentions-legales" class="text-light text-decoration-none me-3">Mentions légales</a>
+                    <a href="/confidentialite" class="text-light text-decoration-none">Confidentialité</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</footer>
